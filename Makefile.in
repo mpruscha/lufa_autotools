@@ -130,7 +130,9 @@ am__uninstall_files_from_dir = { \
   }
 am__installdirs = "$(DESTDIR)$(libdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
-liblufa_la_LIBADD =
+liblufa_la_DEPENDENCIES = LUFA/Drivers/USB/Core/AVR8/libavr8.la \
+	LUFA/Drivers/USB/Core/libcore.la \
+	LUFA/Drivers/USB/Class/Device/libdevice.la
 am_liblufa_la_OBJECTS =
 liblufa_la_OBJECTS = $(am_liblufa_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -214,12 +216,14 @@ CTAGS = ctags
 CSCOPE = cscope
 DIST_SUBDIRS = $(SUBDIRS)
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/conf.h.in \
-	$(top_srcdir)/config/compile $(top_srcdir)/config/config.guess \
+	$(top_srcdir)/config/ar-lib $(top_srcdir)/config/compile \
+	$(top_srcdir)/config/config.guess \
 	$(top_srcdir)/config/config.sub \
 	$(top_srcdir)/config/install-sh $(top_srcdir)/config/ltmain.sh \
-	$(top_srcdir)/config/missing COPYING INSTALL config/compile \
-	config/config.guess config/config.sub config/depcomp \
-	config/install-sh config/ltmain.sh config/missing
+	$(top_srcdir)/config/missing COPYING INSTALL config/ar-lib \
+	config/compile config/config.guess config/config.sub \
+	config/depcomp config/install-sh config/ltmain.sh \
+	config/missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -376,10 +380,17 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-SUBDIRS = . LUFA/Drivers/USB/Core LUFA/Drivers/USB/Core/AVR8
+SUBDIRS = \
+          LUFA/Drivers/USB/Core \
+					LUFA/Drivers/USB/Core/AVR8 \
+					LUFA/Drivers/USB/Class/Device 
+
 lib_LTLIBRARIES = liblufa.la
-liblufa_la_SOURCES = core avr8
-liblufa_la_CPPFLAGS = -I$(top_srcdir)/src -std=c99 
+liblufa_la_SOURCES = 
+liblufa_la_LIBADD = LUFA/Drivers/USB/Core/AVR8/libavr8.la \
+									  LUFA/Drivers/USB/Core/libcore.la \
+                    LUFA/Drivers/USB/Class/Device/libdevice.la
+
 all: conf.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
@@ -912,6 +923,8 @@ uninstall-am: uninstall-libLTLIBRARIES
 
 .PRECIOUS: Makefile
 
+
+#liblufa_a_CPPFLAGS = -I$(top_srcdir)/src -std=c99 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

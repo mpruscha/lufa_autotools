@@ -4,12 +4,18 @@ AC_CONFIG_AUX_DIR(config)
 AM_INIT_AUTOMAKE([foreign subdir-objects])
 AC_CONFIG_HEADERS([conf.h])
 
-LT_INIT
+
 AC_PROG_CC
 AC_PROG_CC_STDC
+AC_PROG_RANLIB
+AM_PROG_AR
+
+LT_INIT
 
 AC_CONFIG_SRCDIR(LUFA/Drivers/Board/Board.h)
 
-
-
-AC_OUTPUT(Makefile LUFA/Drivers/USB/Core/Makefile LUFA/Drivers/USB/Core/AVR8/Makefile)
+AC_OUTPUT([Makefile 
+          LUFA/Drivers/USB/Core/Makefile 
+          LUFA/Drivers/USB/Core/AVR8/Makefile
+          LUFA/Drivers/USB/Class/Device/Makefile
+          ])
