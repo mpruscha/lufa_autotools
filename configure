@@ -11914,7 +11914,7 @@ CC="$lt_save_CC"
 
 
 
-ac_config_files="$ac_config_files Makefile LUFA/Drivers/USB/Core/Makefile LUFA/Drivers/USB/Core/AVR8/Makefile LUFA/Drivers/USB/Class/Device/Makefile"
+ac_config_files="$ac_config_files Makefile LUFA/Drivers/USB/Core/Makefile LUFA/Drivers/USB/Core/AVR8/Makefile LUFA/Drivers/USB/Class/Device/Makefile LUFA/Makefile LUFA/Drivers/Makefile LUFA/Drivers/USB/Makefile LUFA/Platform/Makefile LUFA/Common/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -12925,6 +12925,11 @@ do
     "LUFA/Drivers/USB/Core/Makefile") CONFIG_FILES="$CONFIG_FILES LUFA/Drivers/USB/Core/Makefile" ;;
     "LUFA/Drivers/USB/Core/AVR8/Makefile") CONFIG_FILES="$CONFIG_FILES LUFA/Drivers/USB/Core/AVR8/Makefile" ;;
     "LUFA/Drivers/USB/Class/Device/Makefile") CONFIG_FILES="$CONFIG_FILES LUFA/Drivers/USB/Class/Device/Makefile" ;;
+    "LUFA/Makefile") CONFIG_FILES="$CONFIG_FILES LUFA/Makefile" ;;
+    "LUFA/Drivers/Makefile") CONFIG_FILES="$CONFIG_FILES LUFA/Drivers/Makefile" ;;
+    "LUFA/Drivers/USB/Makefile") CONFIG_FILES="$CONFIG_FILES LUFA/Drivers/USB/Makefile" ;;
+    "LUFA/Platform/Makefile") CONFIG_FILES="$CONFIG_FILES LUFA/Platform/Makefile" ;;
+    "LUFA/Common/Makefile") CONFIG_FILES="$CONFIG_FILES LUFA/Common/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

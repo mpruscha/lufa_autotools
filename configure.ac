@@ -18,4 +18,9 @@ AC_OUTPUT([Makefile
           LUFA/Drivers/USB/Core/Makefile 
           LUFA/Drivers/USB/Core/AVR8/Makefile
           LUFA/Drivers/USB/Class/Device/Makefile
+          LUFA/Makefile
+          LUFA/Drivers/Makefile
+          LUFA/Drivers/USB/Makefile
+          LUFA/Platform/Makefile
+          LUFA/Common/Makefile
           ])

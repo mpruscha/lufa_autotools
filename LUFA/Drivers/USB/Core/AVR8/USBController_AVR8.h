@@ -49,7 +49,7 @@
 #define __USBCONTROLLER_AVR8_H__
 
 	/* Includes: */
-		#include "../../../../Common/Common.h"
+		#include "Common/Common.h"
 		#include "../USBMode.h"
 		#include "../Events.h"
 		#include "../USBTask.h"
