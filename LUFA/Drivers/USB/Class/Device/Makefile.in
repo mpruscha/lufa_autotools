@@ -14,7 +14,6 @@
 
 @SET_MAKE@
 
-
 VPATH = @srcdir@
 am__is_gnu_make = { \
   if test -z '$(MAKELEVEL)'; then \
@@ -89,25 +88,25 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-subdir = LUFA/Drivers/USB/Core/AVR8
+subdir = LUFA/Drivers/USB/Class/Device
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-DIST_COMMON = $(srcdir)/Makefile.am $(avr8include_HEADERS) \
-	$(am__DIST_COMMON)
+DIST_COMMON = $(srcdir)/Makefile.am $(am__DIST_COMMON)
 mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/conf.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
-libavr8_la_LIBADD =
-am_libavr8_la_OBJECTS = libavr8_la-Device_AVR8.lo \
-	libavr8_la-Endpoint_AVR8.lo libavr8_la-EndpointStream_AVR8.lo \
-	libavr8_la-Host_AVR8.lo libavr8_la-Pipe_AVR8.lo \
-	libavr8_la-PipeStream_AVR8.lo libavr8_la-USBController_AVR8.lo \
-	libavr8_la-USBInterrupt_AVR8.lo
-libavr8_la_OBJECTS = $(am_libavr8_la_OBJECTS)
+libdevice_la_LIBADD =
+am_libdevice_la_OBJECTS = libdevice_la-AudioClassDevice.lo \
+	libdevice_la-CDCClassDevice.lo libdevice_la-HIDClassDevice.lo \
+	libdevice_la-MassStorageClassDevice.lo \
+	libdevice_la-MIDIClassDevice.lo \
+	libdevice_la-PrinterClassDevice.lo \
+	libdevice_la-RNDISClassDevice.lo
+libdevice_la_OBJECTS = $(am_libdevice_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -146,42 +145,13 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(libavr8_la_SOURCES)
-DIST_SOURCES = $(libavr8_la_SOURCES)
+SOURCES = $(libdevice_la_SOURCES)
+DIST_SOURCES = $(libdevice_la_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
-am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
-am__vpath_adj = case $$p in \
-    $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
-    *) f=$$p;; \
-  esac;
-am__strip_dir = f=`echo $$p | sed -e 's|^.*/||'`;
-am__install_max = 40
-am__nobase_strip_setup = \
-  srcdirstrip=`echo "$(srcdir)" | sed 's/[].[^$$\\*|]/\\\\&/g'`
-am__nobase_strip = \
-  for p in $$list; do echo "$$p"; done | sed -e "s|$$srcdirstrip/||"
-am__nobase_list = $(am__nobase_strip_setup); \
-  for p in $$list; do echo "$$p $$p"; done | \
-  sed "s| $$srcdirstrip/| |;"' / .*\//!s/ .*/ ./; s,\( .*\)/[^/]*$$,\1,' | \
-  $(AWK) 'BEGIN { files["."] = "" } { files[$$2] = files[$$2] " " $$1; \
-    if (++n[$$2] == $(am__install_max)) \
-      { print $$2, files[$$2]; n[$$2] = 0; files[$$2] = "" } } \
-    END { for (dir in files) print dir, files[dir] }'
-am__base_list = \
-  sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
-  sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
-am__uninstall_files_from_dir = { \
-  test -z "$$files" \
-    || { test ! -d "$$dir" && test ! -f "$$dir" && test ! -r "$$dir"; } \
-    || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
-         $(am__cd) "$$dir" && rm -f $$files; }; \
-  }
-am__installdirs = "$(DESTDIR)$(avr8includedir)"
-HEADERS = $(avr8include_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
 # and print each of them once, without duplicates.  Input order is
@@ -317,28 +287,16 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-noinst_LTLIBRARIES = libavr8.la
-libavr8_la_SOURCES = Device_AVR8.c \
-										 Endpoint_AVR8.c \
-										 EndpointStream_AVR8.c \
-										 Host_AVR8.c \
-										 Pipe_AVR8.c \
-										 PipeStream_AVR8.c \
-										 USBController_AVR8.c \
-										 USBInterrupt_AVR8.c
+noinst_LTLIBRARIES = libdevice.la
+libdevice_la_SOURCES = AudioClassDevice.c \
+											 CDCClassDevice.c \
+											 HIDClassDevice.c \
+											 MassStorageClassDevice.c \
+											 MIDIClassDevice.c \
+											 PrinterClassDevice.c \
+											 RNDISClassDevice.c
 
-avr8includedir = $(includedir)/AVR8
-avr8include_HEADERS = Device_AVR8.h \
-											Endpoint_AVR8.h \
-											EndpointStream_AVR8.h \
-											Host_AVR8.h \
-											OTG_AVR8.h \
-											Pipe_AVR8.h \
-											PipeStream_AVR8.h \
-											USBController_AVR8.h \
-											USBInterrupt_AVR8.h
-
-libavr8_la_CPPFLAGS = -I$(top_srcdir)/LUFA/ -std=c99 
+libdevice_la_CPPFLAGS = -I${top_srcdir}/LUFA/ -std=c99 
 all: all-am
 
 .SUFFIXES:
@@ -352,9 +310,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign LUFA/Drivers/USB/Core/AVR8/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign LUFA/Drivers/USB/Class/Device/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign LUFA/Drivers/USB/Core/AVR8/Makefile
+	  $(AUTOMAKE) --foreign LUFA/Drivers/USB/Class/Device/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -384,8 +342,8 @@ clean-noinstLTLIBRARIES:
 	  rm -f $${locs}; \
 	}
 
-libavr8.la: $(libavr8_la_OBJECTS) $(libavr8_la_DEPENDENCIES) $(EXTRA_libavr8_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(LINK)  $(libavr8_la_OBJECTS) $(libavr8_la_LIBADD) $(LIBS)
+libdevice.la: $(libdevice_la_OBJECTS) $(libdevice_la_DEPENDENCIES) $(EXTRA_libdevice_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(LINK)  $(libdevice_la_OBJECTS) $(libdevice_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -393,14 +351,13 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libavr8_la-Device_AVR8.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libavr8_la-EndpointStream_AVR8.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libavr8_la-Endpoint_AVR8.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libavr8_la-Host_AVR8.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libavr8_la-PipeStream_AVR8.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libavr8_la-Pipe_AVR8.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libavr8_la-USBController_AVR8.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libavr8_la-USBInterrupt_AVR8.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevice_la-AudioClassDevice.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevice_la-CDCClassDevice.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevice_la-HIDClassDevice.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevice_la-MIDIClassDevice.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevice_la-MassStorageClassDevice.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevice_la-PrinterClassDevice.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevice_la-RNDISClassDevice.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -426,88 +383,60 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
 
-libavr8_la-Device_AVR8.lo: Device_AVR8.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libavr8_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libavr8_la-Device_AVR8.lo -MD -MP -MF $(DEPDIR)/libavr8_la-Device_AVR8.Tpo -c -o libavr8_la-Device_AVR8.lo `test -f 'Device_AVR8.c' || echo '$(srcdir)/'`Device_AVR8.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libavr8_la-Device_AVR8.Tpo $(DEPDIR)/libavr8_la-Device_AVR8.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Device_AVR8.c' object='libavr8_la-Device_AVR8.lo' libtool=yes @AMDEPBACKSLASH@
+libdevice_la-AudioClassDevice.lo: AudioClassDevice.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdevice_la-AudioClassDevice.lo -MD -MP -MF $(DEPDIR)/libdevice_la-AudioClassDevice.Tpo -c -o libdevice_la-AudioClassDevice.lo `test -f 'AudioClassDevice.c' || echo '$(srcdir)/'`AudioClassDevice.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdevice_la-AudioClassDevice.Tpo $(DEPDIR)/libdevice_la-AudioClassDevice.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='AudioClassDevice.c' object='libdevice_la-AudioClassDevice.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libavr8_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libavr8_la-Device_AVR8.lo `test -f 'Device_AVR8.c' || echo '$(srcdir)/'`Device_AVR8.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdevice_la-AudioClassDevice.lo `test -f 'AudioClassDevice.c' || echo '$(srcdir)/'`AudioClassDevice.c
 
-libavr8_la-Endpoint_AVR8.lo: Endpoint_AVR8.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libavr8_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libavr8_la-Endpoint_AVR8.lo -MD -MP -MF $(DEPDIR)/libavr8_la-Endpoint_AVR8.Tpo -c -o libavr8_la-Endpoint_AVR8.lo `test -f 'Endpoint_AVR8.c' || echo '$(srcdir)/'`Endpoint_AVR8.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libavr8_la-Endpoint_AVR8.Tpo $(DEPDIR)/libavr8_la-Endpoint_AVR8.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Endpoint_AVR8.c' object='libavr8_la-Endpoint_AVR8.lo' libtool=yes @AMDEPBACKSLASH@
+libdevice_la-CDCClassDevice.lo: CDCClassDevice.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdevice_la-CDCClassDevice.lo -MD -MP -MF $(DEPDIR)/libdevice_la-CDCClassDevice.Tpo -c -o libdevice_la-CDCClassDevice.lo `test -f 'CDCClassDevice.c' || echo '$(srcdir)/'`CDCClassDevice.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdevice_la-CDCClassDevice.Tpo $(DEPDIR)/libdevice_la-CDCClassDevice.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='CDCClassDevice.c' object='libdevice_la-CDCClassDevice.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libavr8_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libavr8_la-Endpoint_AVR8.lo `test -f 'Endpoint_AVR8.c' || echo '$(srcdir)/'`Endpoint_AVR8.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdevice_la-CDCClassDevice.lo `test -f 'CDCClassDevice.c' || echo '$(srcdir)/'`CDCClassDevice.c
 
-libavr8_la-EndpointStream_AVR8.lo: EndpointStream_AVR8.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libavr8_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libavr8_la-EndpointStream_AVR8.lo -MD -MP -MF $(DEPDIR)/libavr8_la-EndpointStream_AVR8.Tpo -c -o libavr8_la-EndpointStream_AVR8.lo `test -f 'EndpointStream_AVR8.c' || echo '$(srcdir)/'`EndpointStream_AVR8.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libavr8_la-EndpointStream_AVR8.Tpo $(DEPDIR)/libavr8_la-EndpointStream_AVR8.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='EndpointStream_AVR8.c' object='libavr8_la-EndpointStream_AVR8.lo' libtool=yes @AMDEPBACKSLASH@
+libdevice_la-HIDClassDevice.lo: HIDClassDevice.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdevice_la-HIDClassDevice.lo -MD -MP -MF $(DEPDIR)/libdevice_la-HIDClassDevice.Tpo -c -o libdevice_la-HIDClassDevice.lo `test -f 'HIDClassDevice.c' || echo '$(srcdir)/'`HIDClassDevice.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdevice_la-HIDClassDevice.Tpo $(DEPDIR)/libdevice_la-HIDClassDevice.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='HIDClassDevice.c' object='libdevice_la-HIDClassDevice.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libavr8_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libavr8_la-EndpointStream_AVR8.lo `test -f 'EndpointStream_AVR8.c' || echo '$(srcdir)/'`EndpointStream_AVR8.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdevice_la-HIDClassDevice.lo `test -f 'HIDClassDevice.c' || echo '$(srcdir)/'`HIDClassDevice.c
 
-libavr8_la-Host_AVR8.lo: Host_AVR8.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libavr8_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libavr8_la-Host_AVR8.lo -MD -MP -MF $(DEPDIR)/libavr8_la-Host_AVR8.Tpo -c -o libavr8_la-Host_AVR8.lo `test -f 'Host_AVR8.c' || echo '$(srcdir)/'`Host_AVR8.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libavr8_la-Host_AVR8.Tpo $(DEPDIR)/libavr8_la-Host_AVR8.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Host_AVR8.c' object='libavr8_la-Host_AVR8.lo' libtool=yes @AMDEPBACKSLASH@
+libdevice_la-MassStorageClassDevice.lo: MassStorageClassDevice.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdevice_la-MassStorageClassDevice.lo -MD -MP -MF $(DEPDIR)/libdevice_la-MassStorageClassDevice.Tpo -c -o libdevice_la-MassStorageClassDevice.lo `test -f 'MassStorageClassDevice.c' || echo '$(srcdir)/'`MassStorageClassDevice.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdevice_la-MassStorageClassDevice.Tpo $(DEPDIR)/libdevice_la-MassStorageClassDevice.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='MassStorageClassDevice.c' object='libdevice_la-MassStorageClassDevice.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libavr8_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libavr8_la-Host_AVR8.lo `test -f 'Host_AVR8.c' || echo '$(srcdir)/'`Host_AVR8.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdevice_la-MassStorageClassDevice.lo `test -f 'MassStorageClassDevice.c' || echo '$(srcdir)/'`MassStorageClassDevice.c
 
-libavr8_la-Pipe_AVR8.lo: Pipe_AVR8.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libavr8_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libavr8_la-Pipe_AVR8.lo -MD -MP -MF $(DEPDIR)/libavr8_la-Pipe_AVR8.Tpo -c -o libavr8_la-Pipe_AVR8.lo `test -f 'Pipe_AVR8.c' || echo '$(srcdir)/'`Pipe_AVR8.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libavr8_la-Pipe_AVR8.Tpo $(DEPDIR)/libavr8_la-Pipe_AVR8.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Pipe_AVR8.c' object='libavr8_la-Pipe_AVR8.lo' libtool=yes @AMDEPBACKSLASH@
+libdevice_la-MIDIClassDevice.lo: MIDIClassDevice.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdevice_la-MIDIClassDevice.lo -MD -MP -MF $(DEPDIR)/libdevice_la-MIDIClassDevice.Tpo -c -o libdevice_la-MIDIClassDevice.lo `test -f 'MIDIClassDevice.c' || echo '$(srcdir)/'`MIDIClassDevice.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdevice_la-MIDIClassDevice.Tpo $(DEPDIR)/libdevice_la-MIDIClassDevice.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='MIDIClassDevice.c' object='libdevice_la-MIDIClassDevice.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libavr8_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libavr8_la-Pipe_AVR8.lo `test -f 'Pipe_AVR8.c' || echo '$(srcdir)/'`Pipe_AVR8.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdevice_la-MIDIClassDevice.lo `test -f 'MIDIClassDevice.c' || echo '$(srcdir)/'`MIDIClassDevice.c
 
-libavr8_la-PipeStream_AVR8.lo: PipeStream_AVR8.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libavr8_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libavr8_la-PipeStream_AVR8.lo -MD -MP -MF $(DEPDIR)/libavr8_la-PipeStream_AVR8.Tpo -c -o libavr8_la-PipeStream_AVR8.lo `test -f 'PipeStream_AVR8.c' || echo '$(srcdir)/'`PipeStream_AVR8.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libavr8_la-PipeStream_AVR8.Tpo $(DEPDIR)/libavr8_la-PipeStream_AVR8.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='PipeStream_AVR8.c' object='libavr8_la-PipeStream_AVR8.lo' libtool=yes @AMDEPBACKSLASH@
+libdevice_la-PrinterClassDevice.lo: PrinterClassDevice.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdevice_la-PrinterClassDevice.lo -MD -MP -MF $(DEPDIR)/libdevice_la-PrinterClassDevice.Tpo -c -o libdevice_la-PrinterClassDevice.lo `test -f 'PrinterClassDevice.c' || echo '$(srcdir)/'`PrinterClassDevice.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdevice_la-PrinterClassDevice.Tpo $(DEPDIR)/libdevice_la-PrinterClassDevice.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='PrinterClassDevice.c' object='libdevice_la-PrinterClassDevice.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libavr8_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libavr8_la-PipeStream_AVR8.lo `test -f 'PipeStream_AVR8.c' || echo '$(srcdir)/'`PipeStream_AVR8.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdevice_la-PrinterClassDevice.lo `test -f 'PrinterClassDevice.c' || echo '$(srcdir)/'`PrinterClassDevice.c
 
-libavr8_la-USBController_AVR8.lo: USBController_AVR8.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libavr8_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libavr8_la-USBController_AVR8.lo -MD -MP -MF $(DEPDIR)/libavr8_la-USBController_AVR8.Tpo -c -o libavr8_la-USBController_AVR8.lo `test -f 'USBController_AVR8.c' || echo '$(srcdir)/'`USBController_AVR8.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libavr8_la-USBController_AVR8.Tpo $(DEPDIR)/libavr8_la-USBController_AVR8.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='USBController_AVR8.c' object='libavr8_la-USBController_AVR8.lo' libtool=yes @AMDEPBACKSLASH@
+libdevice_la-RNDISClassDevice.lo: RNDISClassDevice.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdevice_la-RNDISClassDevice.lo -MD -MP -MF $(DEPDIR)/libdevice_la-RNDISClassDevice.Tpo -c -o libdevice_la-RNDISClassDevice.lo `test -f 'RNDISClassDevice.c' || echo '$(srcdir)/'`RNDISClassDevice.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdevice_la-RNDISClassDevice.Tpo $(DEPDIR)/libdevice_la-RNDISClassDevice.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='RNDISClassDevice.c' object='libdevice_la-RNDISClassDevice.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libavr8_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libavr8_la-USBController_AVR8.lo `test -f 'USBController_AVR8.c' || echo '$(srcdir)/'`USBController_AVR8.c
-
-libavr8_la-USBInterrupt_AVR8.lo: USBInterrupt_AVR8.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libavr8_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libavr8_la-USBInterrupt_AVR8.lo -MD -MP -MF $(DEPDIR)/libavr8_la-USBInterrupt_AVR8.Tpo -c -o libavr8_la-USBInterrupt_AVR8.lo `test -f 'USBInterrupt_AVR8.c' || echo '$(srcdir)/'`USBInterrupt_AVR8.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libavr8_la-USBInterrupt_AVR8.Tpo $(DEPDIR)/libavr8_la-USBInterrupt_AVR8.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='USBInterrupt_AVR8.c' object='libavr8_la-USBInterrupt_AVR8.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libavr8_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libavr8_la-USBInterrupt_AVR8.lo `test -f 'USBInterrupt_AVR8.c' || echo '$(srcdir)/'`USBInterrupt_AVR8.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdevice_la-RNDISClassDevice.lo `test -f 'RNDISClassDevice.c' || echo '$(srcdir)/'`RNDISClassDevice.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
 
 clean-libtool:
 	-rm -rf .libs _libs
-install-avr8includeHEADERS: $(avr8include_HEADERS)
-	@$(NORMAL_INSTALL)
-	@list='$(avr8include_HEADERS)'; test -n "$(avr8includedir)" || list=; \
-	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(avr8includedir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(avr8includedir)" || exit 1; \
-	fi; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(avr8includedir)'"; \
-	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(avr8includedir)" || exit $$?; \
-	done
-
-uninstall-avr8includeHEADERS:
-	@$(NORMAL_UNINSTALL)
-	@list='$(avr8include_HEADERS)'; test -n "$(avr8includedir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(avr8includedir)'; $(am__uninstall_files_from_dir)
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -593,11 +522,8 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(LTLIBRARIES) $(HEADERS)
+all-am: Makefile $(LTLIBRARIES)
 installdirs:
-	for dir in "$(DESTDIR)$(avr8includedir)"; do \
-	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
-	done
 install: install-am
 install-exec: install-exec-am
 install-data: install-data-am
@@ -651,7 +577,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-avr8includeHEADERS
+install-data-am:
 
 install-dvi: install-dvi-am
 
@@ -697,7 +623,7 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-avr8includeHEADERS
+uninstall-am:
 
 .MAKE: install-am install-strip
 
@@ -705,16 +631,15 @@ uninstall-am: uninstall-avr8includeHEADERS
 	clean-libtool clean-noinstLTLIBRARIES cscopelist-am ctags \
 	ctags-am distclean distclean-compile distclean-generic \
 	distclean-libtool distclean-tags distdir dvi dvi-am html \
-	html-am info info-am install install-am \
-	install-avr8includeHEADERS install-data install-data-am \
-	install-dvi install-dvi-am install-exec install-exec-am \
-	install-html install-html-am install-info install-info-am \
-	install-man install-pdf install-pdf-am install-ps \
-	install-ps-am install-strip installcheck installcheck-am \
-	installdirs maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-am uninstall \
-	uninstall-am uninstall-avr8includeHEADERS
+	html-am info info-am install install-am install-data \
+	install-data-am install-dvi install-dvi-am install-exec \
+	install-exec-am install-html install-html-am install-info \
+	install-info-am install-man install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags tags-am uninstall uninstall-am
 
 .PRECIOUS: Makefile
 

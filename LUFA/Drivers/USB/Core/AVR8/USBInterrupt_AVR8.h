@@ -42,7 +42,7 @@
 #define __USBINTERRUPT_AVR8_H__
 
 	/* Includes: */
-		#include "../../../../Common/Common.h"
+		#include "Common/Common.h"
 
 	/* Enable C linkage for C++ Compilers: */
 		#if defined(__cplusplus)

@@ -1,0 +1,1 @@
+SUBDIRS = Common Platform Drivers
