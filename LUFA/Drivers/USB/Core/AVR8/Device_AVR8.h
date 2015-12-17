@@ -49,11 +49,11 @@
 #define __USBDEVICE_AVR8_H__
 
 	/* Includes: */
-		#include "../../../../Common/Common.h"
-		#include "../USBController.h"
-		#include "../StdDescriptors.h"
-		#include "../USBInterrupt.h"
-		#include "../Endpoint.h"
+		#include "Common/Common.h"
+		#include "Core/USBController.h"
+		#include "Core/StdDescriptors.h"
+		#include "Core/USBInterrupt.h"
+		#include "Core/Endpoint.h"
 
 	/* Enable C linkage for C++ Compilers: */
 		#if defined(__cplusplus)

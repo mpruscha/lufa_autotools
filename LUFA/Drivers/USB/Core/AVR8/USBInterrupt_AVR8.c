@@ -28,11 +28,11 @@
   this software.
 */
 
-#include "../../../../Common/Common.h"
+#include "Common/Common.h"
 #if (ARCH == ARCH_AVR8)
 
 #define  __INCLUDE_FROM_USB_DRIVER
-#include "../USBInterrupt.h"
+#include "Core/USBInterrupt.h"
 
 void USB_INT_DisableAllInterrupts(void)
 {

@@ -8,4 +8,5 @@ libdevice_la_SOURCES = AudioClassDevice.c \
 											 RNDISClassDevice.c
 
 
-libdevice_la_CPPFLAGS = -I${top_srcdir}/LUFA/ -std=c99 
+
+libdevice_la_CPPFLAGS = -I${top_srcdir}/LUFA/ -I${top_srcdir}/LUFA/Drivers/USB/ -std=c99 

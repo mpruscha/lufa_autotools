@@ -50,24 +50,24 @@
 
 	/* Includes: */
 		#include "Common/Common.h"
-		#include "../USBMode.h"
-		#include "../Events.h"
-		#include "../USBTask.h"
-		#include "../USBInterrupt.h"
+		#include "Core/USBMode.h"
+		#include "Core/Events.h"
+		#include "Core/USBTask.h"
+		#include "Core/USBInterrupt.h"
 
 		#if defined(USB_CAN_BE_HOST) || defined(__DOXYGEN__)
-			#include "../Host.h"
-			#include "../OTG.h"
-			#include "../Pipe.h"
-			#include "../HostStandardReq.h"
-			#include "../PipeStream.h"
+			#include "Core/Host.h"
+			#include "Core/OTG.h"
+			#include "Core/Pipe.h"
+			#include "Core/HostStandardReq.h"
+			#include "Core/PipeStream.h"
 		#endif
 
 		#if defined(USB_CAN_BE_DEVICE) || defined(__DOXYGEN__)
-			#include "../Device.h"
-			#include "../Endpoint.h"
-			#include "../DeviceStandardReq.h"
-			#include "../EndpointStream.h"
+			#include "Core/Device.h"
+			#include "Core/Endpoint.h"
+			#include "Core/DeviceStandardReq.h"
+			#include "Core/EndpointStream.h"
 		#endif
 
 	/* Enable C linkage for C++ Compilers: */

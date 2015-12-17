@@ -28,15 +28,15 @@
   this software.
 */
 
-#include "../../../../Common/Common.h"
+#include "Common/Common.h"
 #if (ARCH == ARCH_AVR8)
 
 #define  __INCLUDE_FROM_USB_DRIVER
-#include "../USBMode.h"
+#include "Core/USBMode.h"
 
 #if defined(USB_CAN_BE_HOST)
 
-#include "../Pipe.h"
+#include "Core/Pipe.h"
 
 uint8_t USB_Host_ControlPipeSize = PIPE_CONTROLPIPE_DEFAULT_SIZE;
 
