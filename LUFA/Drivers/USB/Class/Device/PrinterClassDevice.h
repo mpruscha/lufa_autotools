@@ -54,8 +54,8 @@
 #define _PRINTER_CLASS_DEVICE_H_
 
 	/* Includes: */
-		#include "../../USB.h"
-		#include "../Common/PrinterClassCommon.h"
+		#include "USB.h"
+		#include "Common/PrinterClassCommon.h"
 
 		#include <stdio.h>
 

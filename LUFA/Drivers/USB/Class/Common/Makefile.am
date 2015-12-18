@@ -1,5 +1,5 @@
-noinst_LTLIBRARIES = libdevice.la
-libdevice_la_SOURCES = AudioClassDevice.c \
+noinst_LTLIBRARIES = libclasscommon.la
+libclasscommon_la_SOURCES = AudioClassDevice.c \
 											 CDCClassDevice.c \
 											 HIDClassDevice.c \
 											 MassStorageClassDevice.c \
@@ -8,9 +8,9 @@ libdevice_la_SOURCES = AudioClassDevice.c \
 											 RNDISClassDevice.c
 
 
-deviceincludedir = $(includedir)/Device
+classcommonincludedir = $(includedir)/Common
 
-deviceinclude_HEADERS = AudioClassDevice.h \
+classcommoninclude_HEADERS  = AudioClassDevice.h \
 												CDCClassDevice.h \
 												HIDClassDevice.h \
 												MassStorageClassDevice.h \

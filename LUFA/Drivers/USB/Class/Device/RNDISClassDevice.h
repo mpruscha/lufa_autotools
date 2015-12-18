@@ -54,8 +54,8 @@
 #define _RNDIS_CLASS_DEVICE_H_
 
 	/* Includes: */
-		#include "../../USB.h"
-		#include "../Common/RNDISClassCommon.h"
+		#include "USB.h"
+		#include "Common/RNDISClassCommon.h"
 
 	/* Enable C linkage for C++ Compilers: */
 		#if defined(__cplusplus)

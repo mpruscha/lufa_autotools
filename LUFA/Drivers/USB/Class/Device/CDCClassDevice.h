@@ -72,8 +72,8 @@
 #define _CDC_CLASS_DEVICE_H_
 
 	/* Includes: */
-		#include "../../USB.h"
-		#include "../Common/CDCClassCommon.h"
+		#include "USB.h"
+		#include "Common/CDCClassCommon.h"
 
 		#include <stdio.h>
 

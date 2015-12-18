@@ -54,8 +54,8 @@
 #define _AUDIO_CLASS_DEVICE_H_
 
 	/* Includes: */
-		#include "../../USB.h"
-		#include "../Common/AudioClassCommon.h"
+		#include "USB.h"
+		#include "Common/AudioClassCommon.h"
 
 	/* Enable C linkage for C++ Compilers: */
 		#if defined(__cplusplus)
