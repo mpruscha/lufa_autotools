@@ -1,4 +1,4 @@
-SUBDIRS = Device
+SUBDIRS = Device Common
 
 classincludedir = $(includedir)/Class
 
