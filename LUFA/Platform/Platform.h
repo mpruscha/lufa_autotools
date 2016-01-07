@@ -66,7 +66,7 @@
 #define __LUFA_PLATFORM_H__
 
 	/* Includes: */
-		#include "../Common/Common.h"
+		#include "Common/Common.h"
 
 	/* Includes: */
 		#if (ARCH == ARCH_UC3)
