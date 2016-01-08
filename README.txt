@@ -20,7 +20,8 @@
                      http://www.lufa-lib.org/license
 
 
-LUFA library with autotools support
+LUFA library with autotools support.
+This fork excludes all documentation and demos, please check the original abcminiuser/lufa github repo for that.
 
 Example usage:
 
