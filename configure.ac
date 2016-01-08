@@ -23,4 +23,6 @@ AC_OUTPUT([Makefile
           LUFA/Drivers/USB/Makefile
           LUFA/Platform/Makefile
           LUFA/Common/Makefile
+          LUFA/Drivers/USB/Class/Makefile
+          LUFA/Drivers/USB/Class/Common/Makefile
           ])

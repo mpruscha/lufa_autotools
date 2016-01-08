@@ -54,8 +54,8 @@
 #define _HID_CLASS_DEVICE_H_
 
 	/* Includes: */
-		#include "../../USB.h"
-		#include "../Common/HIDClassCommon.h"
+		#include "USB.h"
+		#include "Common/HIDClassCommon.h"
 
 	/* Enable C linkage for C++ Compilers: */
 		#if defined(__cplusplus)

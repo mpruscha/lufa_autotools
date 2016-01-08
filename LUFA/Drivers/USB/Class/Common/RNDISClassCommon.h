@@ -54,7 +54,7 @@
 		#define __INCLUDE_FROM_CDC_DRIVER
 
 	/* Includes: */
-		#include "../../Core/StdDescriptors.h"
+		#include "Core/StdDescriptors.h"
 		#include "CDCClassCommon.h"
 
 	/* Enable C linkage for C++ Compilers: */

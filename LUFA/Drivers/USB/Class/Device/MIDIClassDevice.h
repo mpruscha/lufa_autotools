@@ -54,8 +54,8 @@
 #define _MIDI_CLASS_DEVICE_H_
 
 	/* Includes: */
-		#include "../../USB.h"
-		#include "../Common/MIDIClassCommon.h"
+		#include "USB.h"
+		#include "Common/MIDIClassCommon.h"
 
 	/* Enable C linkage for C++ Compilers: */
 		#if defined(__cplusplus)

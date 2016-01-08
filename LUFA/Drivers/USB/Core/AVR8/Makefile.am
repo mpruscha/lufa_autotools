@@ -21,4 +21,4 @@ avr8include_HEADERS = Device_AVR8.h \
 											USBInterrupt_AVR8.h
 
 
-libavr8_la_CPPFLAGS = -I$(top_srcdir)/LUFA/ -std=c99 
+libavr8_la_CPPFLAGS = -I$(top_srcdir)/LUFA/ -I$(top_srcdir)/LUFA/Drivers/USB/ -std=c99 

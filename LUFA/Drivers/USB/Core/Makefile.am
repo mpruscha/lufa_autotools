@@ -11,6 +11,7 @@ coreinclude_HEADERS = USBTask.h \
 									USBMode.h \
 									Events.h \
 									StdDescriptors.h \
+									StdRequestType.h \
 									ConfigDescriptors.h \
 									USBController.h \
 									USBInterrupt.h \
@@ -24,4 +25,4 @@ coreinclude_HEADERS = USBTask.h \
 									EndpointStream.h \
 									OTG.h
 
-libcore_la_CPPFLAGS = -I$(top_srcdir)/LUFA/ -std=c99 
+libcore_la_CPPFLAGS = -I$(top_srcdir)/LUFA/ -I$(top_srcdir)/LUFA/Drivers/USB/ -I$(top_srcdir)/LUFA/Drivers/USB/Core/ -std=c99 

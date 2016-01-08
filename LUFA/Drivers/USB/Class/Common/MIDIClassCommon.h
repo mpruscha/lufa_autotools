@@ -54,7 +54,7 @@
 		#define __INCLUDE_FROM_AUDIO_DRIVER
 
 	/* Includes: */
-		#include "../../Core/StdDescriptors.h"
+		#include "Core/StdDescriptors.h"
 		#include "AudioClassCommon.h"
 
 	/* Enable C linkage for C++ Compilers: */

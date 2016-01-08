@@ -49,10 +49,10 @@
 #define __USBHOST_AVR8_H__
 
 	/* Includes: */
-		#include "../../../../Common/Common.h"
-		#include "../StdDescriptors.h"
-		#include "../Pipe.h"
-		#include "../USBInterrupt.h"
+		#include "Common/Common.h"
+		#include "Core/StdDescriptors.h"
+		#include "Core/Pipe.h"
+		#include "Core/USBInterrupt.h"
 
 	/* Enable C linkage for C++ Compilers: */
 		#if defined(__cplusplus)

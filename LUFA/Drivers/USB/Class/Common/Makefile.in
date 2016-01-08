@@ -89,26 +89,21 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-subdir = LUFA/Drivers/USB/Class/Device
+subdir = LUFA/Drivers/USB/Class/Common
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-DIST_COMMON = $(srcdir)/Makefile.am $(deviceinclude_HEADERS) \
+DIST_COMMON = $(srcdir)/Makefile.am $(classcommoninclude_HEADERS) \
 	$(am__DIST_COMMON)
 mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/conf.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
-libdevice_la_LIBADD =
-am_libdevice_la_OBJECTS = libdevice_la-AudioClassDevice.lo \
-	libdevice_la-CDCClassDevice.lo libdevice_la-HIDClassDevice.lo \
-	libdevice_la-MassStorageClassDevice.lo \
-	libdevice_la-MIDIClassDevice.lo \
-	libdevice_la-PrinterClassDevice.lo \
-	libdevice_la-RNDISClassDevice.lo
-libdevice_la_OBJECTS = $(am_libdevice_la_OBJECTS)
+libclasscommon_la_LIBADD =
+am_libclasscommon_la_OBJECTS = libclasscommon_la-HIDParser.lo
+libclasscommon_la_OBJECTS = $(am_libclasscommon_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -147,8 +142,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(libdevice_la_SOURCES)
-DIST_SOURCES = $(libdevice_la_SOURCES)
+SOURCES = $(libclasscommon_la_SOURCES)
+DIST_SOURCES = $(libclasscommon_la_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -181,8 +176,8 @@ am__uninstall_files_from_dir = { \
     || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
-am__installdirs = "$(DESTDIR)$(deviceincludedir)"
-HEADERS = $(deviceinclude_HEADERS)
+am__installdirs = "$(DESTDIR)$(classcommonincludedir)"
+HEADERS = $(classcommoninclude_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
 # and print each of them once, without duplicates.  Input order is
@@ -318,25 +313,22 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-noinst_LTLIBRARIES = libdevice.la
-libdevice_la_SOURCES = AudioClassDevice.c \
-											 CDCClassDevice.c \
-											 HIDClassDevice.c \
-											 MassStorageClassDevice.c \
-											 MIDIClassDevice.c \
-											 PrinterClassDevice.c \
-											 RNDISClassDevice.c
+noinst_LTLIBRARIES = libclasscommon.la
+libclasscommon_la_SOURCES = HIDParser.c 
+classcommonincludedir = $(includedir)/Common
+classcommoninclude_HEADERS = AndroidAccessoryClassCommon.h \
+															AudioClassCommon.h \
+															CDCClassCommon.h \
+															HIDClassCommon.h \
+															HIDParser.h \
+															HIDReportData.h \
+															MassStorageClassCommon.h \
+															MIDIClassCommon.h \
+															PrinterClassCommon.h \
+															RNDISClassCommon.h \
+															StillImageClassCommon.h
 
-deviceincludedir = $(includedir)/Device
-deviceinclude_HEADERS = AudioClassDevice.h \
-												CDCClassDevice.h \
-												HIDClassDevice.h \
-												MassStorageClassDevice.h \
-												MIDIClassDevice.h \
-												PrinterClassDevice.h \
-												RNDISClassDevice.h 
-
-libdevice_la_CPPFLAGS = -I${top_srcdir}/LUFA/ -I${top_srcdir}/LUFA/Drivers/USB/  -I${top_srcdir}/LUFA/Drivers/USB/Class/ -std=c99 
+libclasscommon_la_CPPFLAGS = -I${top_srcdir}/LUFA/ -I${top_srcdir}/LUFA/Drivers/USB/  -I${top_srcdir}/LUFA/Drivers/USB/Class/ -std=c99 
 all: all-am
 
 .SUFFIXES:
@@ -350,9 +342,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign LUFA/Drivers/USB/Class/Device/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign LUFA/Drivers/USB/Class/Common/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign LUFA/Drivers/USB/Class/Device/Makefile
+	  $(AUTOMAKE) --foreign LUFA/Drivers/USB/Class/Common/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -382,8 +374,8 @@ clean-noinstLTLIBRARIES:
 	  rm -f $${locs}; \
 	}
 
-libdevice.la: $(libdevice_la_OBJECTS) $(libdevice_la_DEPENDENCIES) $(EXTRA_libdevice_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(LINK)  $(libdevice_la_OBJECTS) $(libdevice_la_LIBADD) $(LIBS)
+libclasscommon.la: $(libclasscommon_la_OBJECTS) $(libclasscommon_la_DEPENDENCIES) $(EXTRA_libclasscommon_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(LINK)  $(libclasscommon_la_OBJECTS) $(libclasscommon_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -391,13 +383,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevice_la-AudioClassDevice.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevice_la-CDCClassDevice.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevice_la-HIDClassDevice.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevice_la-MIDIClassDevice.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevice_la-MassStorageClassDevice.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevice_la-PrinterClassDevice.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevice_la-RNDISClassDevice.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libclasscommon_la-HIDParser.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -423,81 +409,39 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
 
-libdevice_la-AudioClassDevice.lo: AudioClassDevice.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdevice_la-AudioClassDevice.lo -MD -MP -MF $(DEPDIR)/libdevice_la-AudioClassDevice.Tpo -c -o libdevice_la-AudioClassDevice.lo `test -f 'AudioClassDevice.c' || echo '$(srcdir)/'`AudioClassDevice.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdevice_la-AudioClassDevice.Tpo $(DEPDIR)/libdevice_la-AudioClassDevice.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='AudioClassDevice.c' object='libdevice_la-AudioClassDevice.lo' libtool=yes @AMDEPBACKSLASH@
+libclasscommon_la-HIDParser.lo: HIDParser.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libclasscommon_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libclasscommon_la-HIDParser.lo -MD -MP -MF $(DEPDIR)/libclasscommon_la-HIDParser.Tpo -c -o libclasscommon_la-HIDParser.lo `test -f 'HIDParser.c' || echo '$(srcdir)/'`HIDParser.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libclasscommon_la-HIDParser.Tpo $(DEPDIR)/libclasscommon_la-HIDParser.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='HIDParser.c' object='libclasscommon_la-HIDParser.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdevice_la-AudioClassDevice.lo `test -f 'AudioClassDevice.c' || echo '$(srcdir)/'`AudioClassDevice.c
-
-libdevice_la-CDCClassDevice.lo: CDCClassDevice.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdevice_la-CDCClassDevice.lo -MD -MP -MF $(DEPDIR)/libdevice_la-CDCClassDevice.Tpo -c -o libdevice_la-CDCClassDevice.lo `test -f 'CDCClassDevice.c' || echo '$(srcdir)/'`CDCClassDevice.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdevice_la-CDCClassDevice.Tpo $(DEPDIR)/libdevice_la-CDCClassDevice.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='CDCClassDevice.c' object='libdevice_la-CDCClassDevice.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdevice_la-CDCClassDevice.lo `test -f 'CDCClassDevice.c' || echo '$(srcdir)/'`CDCClassDevice.c
-
-libdevice_la-HIDClassDevice.lo: HIDClassDevice.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdevice_la-HIDClassDevice.lo -MD -MP -MF $(DEPDIR)/libdevice_la-HIDClassDevice.Tpo -c -o libdevice_la-HIDClassDevice.lo `test -f 'HIDClassDevice.c' || echo '$(srcdir)/'`HIDClassDevice.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdevice_la-HIDClassDevice.Tpo $(DEPDIR)/libdevice_la-HIDClassDevice.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='HIDClassDevice.c' object='libdevice_la-HIDClassDevice.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdevice_la-HIDClassDevice.lo `test -f 'HIDClassDevice.c' || echo '$(srcdir)/'`HIDClassDevice.c
-
-libdevice_la-MassStorageClassDevice.lo: MassStorageClassDevice.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdevice_la-MassStorageClassDevice.lo -MD -MP -MF $(DEPDIR)/libdevice_la-MassStorageClassDevice.Tpo -c -o libdevice_la-MassStorageClassDevice.lo `test -f 'MassStorageClassDevice.c' || echo '$(srcdir)/'`MassStorageClassDevice.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdevice_la-MassStorageClassDevice.Tpo $(DEPDIR)/libdevice_la-MassStorageClassDevice.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='MassStorageClassDevice.c' object='libdevice_la-MassStorageClassDevice.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdevice_la-MassStorageClassDevice.lo `test -f 'MassStorageClassDevice.c' || echo '$(srcdir)/'`MassStorageClassDevice.c
-
-libdevice_la-MIDIClassDevice.lo: MIDIClassDevice.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdevice_la-MIDIClassDevice.lo -MD -MP -MF $(DEPDIR)/libdevice_la-MIDIClassDevice.Tpo -c -o libdevice_la-MIDIClassDevice.lo `test -f 'MIDIClassDevice.c' || echo '$(srcdir)/'`MIDIClassDevice.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdevice_la-MIDIClassDevice.Tpo $(DEPDIR)/libdevice_la-MIDIClassDevice.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='MIDIClassDevice.c' object='libdevice_la-MIDIClassDevice.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdevice_la-MIDIClassDevice.lo `test -f 'MIDIClassDevice.c' || echo '$(srcdir)/'`MIDIClassDevice.c
-
-libdevice_la-PrinterClassDevice.lo: PrinterClassDevice.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdevice_la-PrinterClassDevice.lo -MD -MP -MF $(DEPDIR)/libdevice_la-PrinterClassDevice.Tpo -c -o libdevice_la-PrinterClassDevice.lo `test -f 'PrinterClassDevice.c' || echo '$(srcdir)/'`PrinterClassDevice.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdevice_la-PrinterClassDevice.Tpo $(DEPDIR)/libdevice_la-PrinterClassDevice.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='PrinterClassDevice.c' object='libdevice_la-PrinterClassDevice.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdevice_la-PrinterClassDevice.lo `test -f 'PrinterClassDevice.c' || echo '$(srcdir)/'`PrinterClassDevice.c
-
-libdevice_la-RNDISClassDevice.lo: RNDISClassDevice.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdevice_la-RNDISClassDevice.lo -MD -MP -MF $(DEPDIR)/libdevice_la-RNDISClassDevice.Tpo -c -o libdevice_la-RNDISClassDevice.lo `test -f 'RNDISClassDevice.c' || echo '$(srcdir)/'`RNDISClassDevice.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdevice_la-RNDISClassDevice.Tpo $(DEPDIR)/libdevice_la-RNDISClassDevice.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='RNDISClassDevice.c' object='libdevice_la-RNDISClassDevice.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevice_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdevice_la-RNDISClassDevice.lo `test -f 'RNDISClassDevice.c' || echo '$(srcdir)/'`RNDISClassDevice.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libclasscommon_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libclasscommon_la-HIDParser.lo `test -f 'HIDParser.c' || echo '$(srcdir)/'`HIDParser.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
 
 clean-libtool:
 	-rm -rf .libs _libs
-install-deviceincludeHEADERS: $(deviceinclude_HEADERS)
+install-classcommonincludeHEADERS: $(classcommoninclude_HEADERS)
 	@$(NORMAL_INSTALL)
-	@list='$(deviceinclude_HEADERS)'; test -n "$(deviceincludedir)" || list=; \
+	@list='$(classcommoninclude_HEADERS)'; test -n "$(classcommonincludedir)" || list=; \
 	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(deviceincludedir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(deviceincludedir)" || exit 1; \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(classcommonincludedir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(classcommonincludedir)" || exit 1; \
 	fi; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  echo "$$d$$p"; \
 	done | $(am__base_list) | \
 	while read files; do \
-	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(deviceincludedir)'"; \
-	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(deviceincludedir)" || exit $$?; \
+	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(classcommonincludedir)'"; \
+	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(classcommonincludedir)" || exit $$?; \
 	done
 
-uninstall-deviceincludeHEADERS:
+uninstall-classcommonincludeHEADERS:
 	@$(NORMAL_UNINSTALL)
-	@list='$(deviceinclude_HEADERS)'; test -n "$(deviceincludedir)" || list=; \
+	@list='$(classcommoninclude_HEADERS)'; test -n "$(classcommonincludedir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(deviceincludedir)'; $(am__uninstall_files_from_dir)
+	dir='$(DESTDIR)$(classcommonincludedir)'; $(am__uninstall_files_from_dir)
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -585,7 +529,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(LTLIBRARIES) $(HEADERS)
 installdirs:
-	for dir in "$(DESTDIR)$(deviceincludedir)"; do \
+	for dir in "$(DESTDIR)$(classcommonincludedir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -641,7 +585,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-deviceincludeHEADERS
+install-data-am: install-classcommonincludeHEADERS
 
 install-dvi: install-dvi-am
 
@@ -687,7 +631,7 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-deviceincludeHEADERS
+uninstall-am: uninstall-classcommonincludeHEADERS
 
 .MAKE: install-am install-strip
 
@@ -695,16 +639,16 @@ uninstall-am: uninstall-deviceincludeHEADERS
 	clean-libtool clean-noinstLTLIBRARIES cscopelist-am ctags \
 	ctags-am distclean distclean-compile distclean-generic \
 	distclean-libtool distclean-tags distdir dvi dvi-am html \
-	html-am info info-am install install-am install-data \
-	install-data-am install-deviceincludeHEADERS install-dvi \
-	install-dvi-am install-exec install-exec-am install-html \
-	install-html-am install-info install-info-am install-man \
-	install-pdf install-pdf-am install-ps install-ps-am \
-	install-strip installcheck installcheck-am installdirs \
-	maintainer-clean maintainer-clean-generic mostlyclean \
-	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
-	pdf pdf-am ps ps-am tags tags-am uninstall uninstall-am \
-	uninstall-deviceincludeHEADERS
+	html-am info info-am install install-am \
+	install-classcommonincludeHEADERS install-data install-data-am \
+	install-dvi install-dvi-am install-exec install-exec-am \
+	install-html install-html-am install-info install-info-am \
+	install-man install-pdf install-pdf-am install-ps \
+	install-ps-am install-strip installcheck installcheck-am \
+	installdirs maintainer-clean maintainer-clean-generic \
+	mostlyclean mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-am uninstall \
+	uninstall-am uninstall-classcommonincludeHEADERS
 
 .PRECIOUS: Makefile
 

@@ -357,9 +357,9 @@
 			}
 
 		/* Includes: */
-			#include "../USBMode.h"
-			#include "../Events.h"
-			#include "../USBController.h"
+			#include "Core/USBMode.h"
+			#include "Core/Events.h"
+			#include "Core/USBController.h"
 
 		/* Function Prototypes: */
 			void USB_INT_ClearAllInterrupts(void);

@@ -73,9 +73,9 @@
 #define __ENDPOINT_AVR8_H__
 
 	/* Includes: */
-		#include "../../../../Common/Common.h"
-		#include "../USBTask.h"
-		#include "../USBInterrupt.h"
+		#include "Common/Common.h"
+		#include "Core/USBTask.h"
+		#include "Core/USBInterrupt.h"
 
 	/* Enable C linkage for C++ Compilers: */
 		#if defined(__cplusplus)
